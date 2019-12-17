@@ -1,4 +1,4 @@
-<%@page import="cn.edu.cqu.card.model.User"%>
+<%@page import="cn.edu.cqu.hospital.model.User"%>
 <%@ page language="java" contentType="text/html;charset=UTF-8"%>
 <!DOCTYPE html>
 <html>
