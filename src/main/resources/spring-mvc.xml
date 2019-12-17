@@ -16,7 +16,7 @@
 	<!-- 静态资源处理 -->
 	<mvc:default-servlet-handler />
 	
-	<context:component-scan base-package="cn.edu.cqu.card.controller" />
+	<context:component-scan base-package="cn.edu.cqu.hospital.controller" />
 	
 	<!-- 视图 -->
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">

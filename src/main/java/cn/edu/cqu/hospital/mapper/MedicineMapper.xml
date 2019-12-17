@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.cqu.hospital.mapper.MedicineMapper">
+  <resultMap id="BaseResultMap" type="cn.edu.cqu.hospital.model.Medicine">
+    <id column="MEDICINE_ID" jdbcType="VARCHAR" property="medicineId" />
+    <result column="MEDICINE_NAME" jdbcType="VARCHAR" property="medicineName" />
+    <result column="MEDICINE_SPECIFICATION" jdbcType="VARCHAR" property="medicineSpecification" />
+    <result column="MEDICINE_STOCK" jdbcType="INTEGER" property="medicineStock" />
+    <result column="MEDICINE_PRICE" jdbcType="REAL" property="medicinePrice" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    MEDICINE_ID, MEDICINE_NAME, MEDICINE_SPECIFICATION, MEDICINE_STOCK, MEDICINE_PRICE
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from medicine
+    where MEDICINE_ID = #{medicineId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from medicine
+    where MEDICINE_ID = #{medicineId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="cn.edu.cqu.hospital.model.Medicine">
+    insert into medicine (MEDICINE_ID, MEDICINE_NAME, MEDICINE_SPECIFICATION, 
+      MEDICINE_STOCK, MEDICINE_PRICE)
+    values (#{medicineId,jdbcType=VARCHAR}, #{medicineName,jdbcType=VARCHAR}, #{medicineSpecification,jdbcType=VARCHAR}, 
+      #{medicineStock,jdbcType=INTEGER}, #{medicinePrice,jdbcType=REAL})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.edu.cqu.hospital.model.Medicine">
+    insert into medicine
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="medicineId != null">
+        MEDICINE_ID,
+      </if>
+      <if test="medicineName != null">
+        MEDICINE_NAME,
+      </if>
+      <if test="medicineSpecification != null">
+        MEDICINE_SPECIFICATION,
+      </if>
+      <if test="medicineStock != null">
+        MEDICINE_STOCK,
+      </if>
+      <if test="medicinePrice != null">
+        MEDICINE_PRICE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="medicineId != null">
+        #{medicineId,jdbcType=VARCHAR},
+      </if>
+      <if test="medicineName != null">
+        #{medicineName,jdbcType=VARCHAR},
+      </if>
+      <if test="medicineSpecification != null">
+        #{medicineSpecification,jdbcType=VARCHAR},
+      </if>
+      <if test="medicineStock != null">
+        #{medicineStock,jdbcType=INTEGER},
+      </if>
+      <if test="medicinePrice != null">
+        #{medicinePrice,jdbcType=REAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.edu.cqu.hospital.model.Medicine">
+    update medicine
+    <set>
+      <if test="medicineName != null">
+        MEDICINE_NAME = #{medicineName,jdbcType=VARCHAR},
+      </if>
+      <if test="medicineSpecification != null">
+        MEDICINE_SPECIFICATION = #{medicineSpecification,jdbcType=VARCHAR},
+      </if>
+      <if test="medicineStock != null">
+        MEDICINE_STOCK = #{medicineStock,jdbcType=INTEGER},
+      </if>
+      <if test="medicinePrice != null">
+        MEDICINE_PRICE = #{medicinePrice,jdbcType=REAL},
+      </if>
+    </set>
+    where MEDICINE_ID = #{medicineId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.edu.cqu.hospital.model.Medicine">
+    update medicine
+    set MEDICINE_NAME = #{medicineName,jdbcType=VARCHAR},
+      MEDICINE_SPECIFICATION = #{medicineSpecification,jdbcType=VARCHAR},
+      MEDICINE_STOCK = #{medicineStock,jdbcType=INTEGER},
+      MEDICINE_PRICE = #{medicinePrice,jdbcType=REAL}
+    where MEDICINE_ID = #{medicineId,jdbcType=VARCHAR}
+  </update>
+</mapper>

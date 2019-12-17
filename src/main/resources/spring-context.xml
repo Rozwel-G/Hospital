@@ -17,9 +17,9 @@
     
 	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
 	   	<property name="driverClassName" value="com.mysql.jdbc.Driver" />
-		<property name="url" value="jdbc:mysql://39.100.144.190:3306/haochijie?useUnicode=true&amp;characterEncoding=UTF-8"/>
+		<property name="url" value="jdbc:mysql://127.0.0.1:3306/hospital?useUnicode=true&amp;characterEncoding=UTF-8"/>
 		<property name="username" value="root" />
-		<property name="password" value="123456"/>
+		<property name="password" value=""/>
 	</bean>
 	   
 
@@ -38,13 +38,13 @@
          	</bean>
          </property>
         
-        <property name="typeAliasesPackage" value="cn.edu.cqu.card.model" />
-        <property name="mapperLocations" value="classpath:cn/edu/cqu/card/mapper/*.xml" />
+        <property name="typeAliasesPackage" value="cn.edu.cqu.hospital.model" />
+        <property name="mapperLocations" value="classpath:cn/edu/cqu/hospital/mapper/*.xml" />
     </bean>
     <!-- 配置扫描器 -->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<!-- 扫描com.hwadee.mybatis.mapper这个包以及它的子包下的所有映射接口类 -->
-        <property name="basePackage" value="cn.edu.cqu.card.mapper" />
+        <property name="basePackage" value="cn.edu.cqu.hospital.mapper" />
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
     </bean>
     
@@ -61,7 +61,7 @@
     <context:annotation-config/>
     
     <!-- 让Spring通过自动扫描来查询和管理Bean -->
-    <context:component-scan base-package="cn.edu.cqu.card">
+    <context:component-scan base-package="cn.edu.cqu.hospital">
     	<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
     </context:component-scan>
     

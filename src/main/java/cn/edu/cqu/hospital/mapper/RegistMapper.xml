@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.cqu.hospital.mapper.RegistMapper">
+  <resultMap id="BaseResultMap" type="cn.edu.cqu.hospital.model.Regist">
+    <id column="REGIST_ID" jdbcType="VARCHAR" property="registId" />
+    <result column="ACCOUNT_ID" jdbcType="VARCHAR" property="accountId" />
+    <result column="DOCTOR_ID" jdbcType="VARCHAR" property="doctorId" />
+    <result column="BILL_ID" jdbcType="VARCHAR" property="billId" />
+    <result column="REGIST_STATE" jdbcType="VARCHAR" property="registState" />
+    <result column="REGIST_TIME" jdbcType="VARCHAR" property="registTime" />
+    <result column="REGIST_DEPARTMENT" jdbcType="VARCHAR" property="registDepartment" />
+    <result column="REGIST_IS_EXPERT" jdbcType="BIT" property="registIsExpert" />
+    <result column="REGIST_QUEUE_NUM" jdbcType="VARCHAR" property="registQueueNum" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    REGIST_ID, ACCOUNT_ID, DOCTOR_ID, BILL_ID, REGIST_STATE, REGIST_TIME, REGIST_DEPARTMENT, 
+    REGIST_IS_EXPERT, REGIST_QUEUE_NUM
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from regist
+    where REGIST_ID = #{registId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from regist
+    where REGIST_ID = #{registId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="cn.edu.cqu.hospital.model.Regist">
+    insert into regist (REGIST_ID, ACCOUNT_ID, DOCTOR_ID, 
+      BILL_ID, REGIST_STATE, REGIST_TIME, 
+      REGIST_DEPARTMENT, REGIST_IS_EXPERT, REGIST_QUEUE_NUM
+      )
+    values (#{registId,jdbcType=VARCHAR}, #{accountId,jdbcType=VARCHAR}, #{doctorId,jdbcType=VARCHAR}, 
+      #{billId,jdbcType=VARCHAR}, #{registState,jdbcType=VARCHAR}, #{registTime,jdbcType=VARCHAR}, 
+      #{registDepartment,jdbcType=VARCHAR}, #{registIsExpert,jdbcType=BIT}, #{registQueueNum,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.edu.cqu.hospital.model.Regist">
+    insert into regist
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="registId != null">
+        REGIST_ID,
+      </if>
+      <if test="accountId != null">
+        ACCOUNT_ID,
+      </if>
+      <if test="doctorId != null">
+        DOCTOR_ID,
+      </if>
+      <if test="billId != null">
+        BILL_ID,
+      </if>
+      <if test="registState != null">
+        REGIST_STATE,
+      </if>
+      <if test="registTime != null">
+        REGIST_TIME,
+      </if>
+      <if test="registDepartment != null">
+        REGIST_DEPARTMENT,
+      </if>
+      <if test="registIsExpert != null">
+        REGIST_IS_EXPERT,
+      </if>
+      <if test="registQueueNum != null">
+        REGIST_QUEUE_NUM,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="registId != null">
+        #{registId,jdbcType=VARCHAR},
+      </if>
+      <if test="accountId != null">
+        #{accountId,jdbcType=VARCHAR},
+      </if>
+      <if test="doctorId != null">
+        #{doctorId,jdbcType=VARCHAR},
+      </if>
+      <if test="billId != null">
+        #{billId,jdbcType=VARCHAR},
+      </if>
+      <if test="registState != null">
+        #{registState,jdbcType=VARCHAR},
+      </if>
+      <if test="registTime != null">
+        #{registTime,jdbcType=VARCHAR},
+      </if>
+      <if test="registDepartment != null">
+        #{registDepartment,jdbcType=VARCHAR},
+      </if>
+      <if test="registIsExpert != null">
+        #{registIsExpert,jdbcType=BIT},
+      </if>
+      <if test="registQueueNum != null">
+        #{registQueueNum,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.edu.cqu.hospital.model.Regist">
+    update regist
+    <set>
+      <if test="accountId != null">
+        ACCOUNT_ID = #{accountId,jdbcType=VARCHAR},
+      </if>
+      <if test="doctorId != null">
+        DOCTOR_ID = #{doctorId,jdbcType=VARCHAR},
+      </if>
+      <if test="billId != null">
+        BILL_ID = #{billId,jdbcType=VARCHAR},
+      </if>
+      <if test="registState != null">
+        REGIST_STATE = #{registState,jdbcType=VARCHAR},
+      </if>
+      <if test="registTime != null">
+        REGIST_TIME = #{registTime,jdbcType=VARCHAR},
+      </if>
+      <if test="registDepartment != null">
+        REGIST_DEPARTMENT = #{registDepartment,jdbcType=VARCHAR},
+      </if>
+      <if test="registIsExpert != null">
+        REGIST_IS_EXPERT = #{registIsExpert,jdbcType=BIT},
+      </if>
+      <if test="registQueueNum != null">
+        REGIST_QUEUE_NUM = #{registQueueNum,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where REGIST_ID = #{registId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.edu.cqu.hospital.model.Regist">
+    update regist
+    set ACCOUNT_ID = #{accountId,jdbcType=VARCHAR},
+      DOCTOR_ID = #{doctorId,jdbcType=VARCHAR},
+      BILL_ID = #{billId,jdbcType=VARCHAR},
+      REGIST_STATE = #{registState,jdbcType=VARCHAR},
+      REGIST_TIME = #{registTime,jdbcType=VARCHAR},
+      REGIST_DEPARTMENT = #{registDepartment,jdbcType=VARCHAR},
+      REGIST_IS_EXPERT = #{registIsExpert,jdbcType=BIT},
+      REGIST_QUEUE_NUM = #{registQueueNum,jdbcType=VARCHAR}
+    where REGIST_ID = #{registId,jdbcType=VARCHAR}
+  </update>
+</mapper>

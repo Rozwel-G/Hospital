@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.cqu.hospital.mapper.DoctorMapper">
+  <resultMap id="BaseResultMap" type="cn.edu.cqu.hospital.model.Doctor">
+    <id column="DOCTOR_ID" jdbcType="VARCHAR" property="doctorId" />
+    <result column="ACCOUNT_ID" jdbcType="VARCHAR" property="accountId" />
+    <result column="DOCTOR_NAME" jdbcType="VARCHAR" property="doctorName" />
+    <result column="DOCTOR_DEPARTMENT" jdbcType="VARCHAR" property="doctorDepartment" />
+    <result column="DOCTOR_WORKTIME" jdbcType="VARCHAR" property="doctorWorktime" />
+    <result column="DOCTOR_POSITION" jdbcType="VARCHAR" property="doctorPosition" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    DOCTOR_ID, ACCOUNT_ID, DOCTOR_NAME, DOCTOR_DEPARTMENT, DOCTOR_WORKTIME, DOCTOR_POSITION
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from doctor
+    where DOCTOR_ID = #{doctorId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from doctor
+    where DOCTOR_ID = #{doctorId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="cn.edu.cqu.hospital.model.Doctor">
+    insert into doctor (DOCTOR_ID, ACCOUNT_ID, DOCTOR_NAME, 
+      DOCTOR_DEPARTMENT, DOCTOR_WORKTIME, DOCTOR_POSITION
+      )
+    values (#{doctorId,jdbcType=VARCHAR}, #{accountId,jdbcType=VARCHAR}, #{doctorName,jdbcType=VARCHAR}, 
+      #{doctorDepartment,jdbcType=VARCHAR}, #{doctorWorktime,jdbcType=VARCHAR}, #{doctorPosition,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.edu.cqu.hospital.model.Doctor">
+    insert into doctor
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="doctorId != null">
+        DOCTOR_ID,
+      </if>
+      <if test="accountId != null">
+        ACCOUNT_ID,
+      </if>
+      <if test="doctorName != null">
+        DOCTOR_NAME,
+      </if>
+      <if test="doctorDepartment != null">
+        DOCTOR_DEPARTMENT,
+      </if>
+      <if test="doctorWorktime != null">
+        DOCTOR_WORKTIME,
+      </if>
+      <if test="doctorPosition != null">
+        DOCTOR_POSITION,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="doctorId != null">
+        #{doctorId,jdbcType=VARCHAR},
+      </if>
+      <if test="accountId != null">
+        #{accountId,jdbcType=VARCHAR},
+      </if>
+      <if test="doctorName != null">
+        #{doctorName,jdbcType=VARCHAR},
+      </if>
+      <if test="doctorDepartment != null">
+        #{doctorDepartment,jdbcType=VARCHAR},
+      </if>
+      <if test="doctorWorktime != null">
+        #{doctorWorktime,jdbcType=VARCHAR},
+      </if>
+      <if test="doctorPosition != null">
+        #{doctorPosition,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.edu.cqu.hospital.model.Doctor">
+    update doctor
+    <set>
+      <if test="accountId != null">
+        ACCOUNT_ID = #{accountId,jdbcType=VARCHAR},
+      </if>
+      <if test="doctorName != null">
+        DOCTOR_NAME = #{doctorName,jdbcType=VARCHAR},
+      </if>
+      <if test="doctorDepartment != null">
+        DOCTOR_DEPARTMENT = #{doctorDepartment,jdbcType=VARCHAR},
+      </if>
+      <if test="doctorWorktime != null">
+        DOCTOR_WORKTIME = #{doctorWorktime,jdbcType=VARCHAR},
+      </if>
+      <if test="doctorPosition != null">
+        DOCTOR_POSITION = #{doctorPosition,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where DOCTOR_ID = #{doctorId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.edu.cqu.hospital.model.Doctor">
+    update doctor
+    set ACCOUNT_ID = #{accountId,jdbcType=VARCHAR},
+      DOCTOR_NAME = #{doctorName,jdbcType=VARCHAR},
+      DOCTOR_DEPARTMENT = #{doctorDepartment,jdbcType=VARCHAR},
+      DOCTOR_WORKTIME = #{doctorWorktime,jdbcType=VARCHAR},
+      DOCTOR_POSITION = #{doctorPosition,jdbcType=VARCHAR}
+    where DOCTOR_ID = #{doctorId,jdbcType=VARCHAR}
+  </update>
+</mapper>
