@@ -17,6 +17,12 @@
     from prescription
     where PRESC_ID = #{prescId,jdbcType=VARCHAR}
   </select>
+  <select id="selectUncheckList" resultMap="BaseResultMap">
+  select
+  <include refid="Base_Column_List" />
+  from prescription
+  where PRESC_STATE = "等待配药"
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from prescription
     where PRESC_ID = #{prescId,jdbcType=VARCHAR}

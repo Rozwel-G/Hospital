@@ -1,5 +1,7 @@
 package cn.edu.cqu.hospital.mapper;
 
+import java.util.List;
+
 import cn.edu.cqu.hospital.model.Prescription;
 
 public interface PrescriptionMapper {
@@ -14,4 +16,6 @@ public interface PrescriptionMapper {
     int updateByPrimaryKeySelective(Prescription record);
 
     int updateByPrimaryKey(Prescription record);
+    
+    List<Prescription> selectUncheckList();
 }

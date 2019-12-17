@@ -4,8 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import cn.edu.cqu.hospital.mapper.AccountMapper;
+import cn.edu.cqu.hospital.mapper.PatientMapper;
 import cn.edu.cqu.hospital.mapper.RegistMapper;
 import cn.edu.cqu.hospital.model.Account;
+import cn.edu.cqu.hospital.model.Patient;
 import cn.edu.cqu.hospital.model.Regist;
 import cn.edu.cqu.hospital.service.PatienceService;
 
@@ -16,6 +18,9 @@ public class PatienceServiceImpl implements PatienceService{
 	
 	@Autowired
 	private RegistMapper registMapper;
+	
+	@Autowired
+	private PatientMapper patientMapper;
 
 	@Override
 	public boolean login(Account account) {
@@ -39,6 +44,11 @@ public class PatienceServiceImpl implements PatienceService{
 	public int logon(Account account) {
 		accountMapper.insert(account);
 		return 1;
+	}
+
+	@Override
+	public Patient findPatient(Account account) {
+		return patientMapper.selectByPatientAccount(account.getAccountId());
 	}
 	
 	

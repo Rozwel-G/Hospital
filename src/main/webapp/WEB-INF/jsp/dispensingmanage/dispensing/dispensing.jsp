@@ -156,6 +156,15 @@
 												<th>发药状态</th>
 												<th>医生</th>
 											</tr>
+											<c:forEach items="${requestScope.prescriptions}" var="a">
+												<tr style="background:#fff;">
+												<th>${a.prescId}</th>
+												<th>${a.recardId}</th>
+												<th>${a.billId}</th>
+												<th>${a.prescState}</th>
+												<th>${a.prescPrice}</th>
+												</tr>
+											</c:forEach>
 										</thead>
 										<tbody id="datas">
 											
