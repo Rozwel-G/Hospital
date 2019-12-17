@@ -35,7 +35,11 @@
   </filter-mapping>
   <filter>
     <filter-name>hiddenHttpMethod</filter-name>
+<<<<<<< HEAD
     <filter-class>cn.edu.cqu.hospital.interceptor.MyHiddenHttpMethodFilter</filter-class>
+=======
+    <filter-class>cn.edu.cqu.card.interceptor.MyHiddenHttpMethodFilter</filter-class>
+>>>>>>> 8160381d2577a7502ab19072f7c823f37e53894a
   </filter>
   <filter-mapping>
     <filter-name>hiddenHttpMethod</filter-name>
@@ -43,7 +47,11 @@
   </filter-mapping>
   <filter>
     <filter-name>shopFilter</filter-name>
+<<<<<<< HEAD
     <filter-class>cn.edu.cqu.hospital.interceptor.ShopFilter</filter-class>
+=======
+    <filter-class>cn.edu.cqu.card.interceptor.ShopFilter</filter-class>
+>>>>>>> 8160381d2577a7502ab19072f7c823f37e53894a
   </filter>
   <filter-mapping>
     <filter-name>shopFilter</filter-name>

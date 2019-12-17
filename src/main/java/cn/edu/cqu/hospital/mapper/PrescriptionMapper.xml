@@ -3,6 +3,95 @@
 <mapper namespace="cn.edu.cqu.hospital.mapper.PrescriptionMapper">
   <resultMap id="BaseResultMap" type="cn.edu.cqu.hospital.model.Prescription">
     <id column="PRESC_ID" jdbcType="VARCHAR" property="prescId" />
+    <id column="MEDICINE_ID" jdbcType="VARCHAR" property="medicineId" />
+    <result column="NUMBER" jdbcType="INTEGER" property="number" />
+    <result column="HOW_USE" jdbcType="VARCHAR" property="howUse" />
+    <result column="DRUG_STATE" jdbcType="VARCHAR" property="drugState" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    PRESC_ID, MEDICINE_ID, NUMBER, HOW_USE, DRUG_STATE
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="cn.edu.cqu.hospital.model.PrescriptionKey" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from prescription_detail
+    where PRESC_ID = #{prescId,jdbcType=VARCHAR}
+      and MEDICINE_ID = #{medicineId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="cn.edu.cqu.hospital.model.PrescriptionKey">
+    delete from prescription_detail
+    where PRESC_ID = #{prescId,jdbcType=VARCHAR}
+      and MEDICINE_ID = #{medicineId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="cn.edu.cqu.hospital.model.Prescription">
+    insert into prescription_detail (PRESC_ID, MEDICINE_ID, NUMBER, 
+      HOW_USE, DRUG_STATE)
+    values (#{prescId,jdbcType=VARCHAR}, #{medicineId,jdbcType=VARCHAR}, #{number,jdbcType=INTEGER}, 
+      #{howUse,jdbcType=VARCHAR}, #{drugState,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.edu.cqu.hospital.model.Prescription">
+    insert into prescription_detail
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="prescId != null">
+        PRESC_ID,
+      </if>
+      <if test="medicineId != null">
+        MEDICINE_ID,
+      </if>
+      <if test="number != null">
+        NUMBER,
+      </if>
+      <if test="howUse != null">
+        HOW_USE,
+      </if>
+      <if test="drugState != null">
+        DRUG_STATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="prescId != null">
+        #{prescId,jdbcType=VARCHAR},
+      </if>
+      <if test="medicineId != null">
+        #{medicineId,jdbcType=VARCHAR},
+      </if>
+      <if test="number != null">
+        #{number,jdbcType=INTEGER},
+      </if>
+      <if test="howUse != null">
+        #{howUse,jdbcType=VARCHAR},
+      </if>
+      <if test="drugState != null">
+        #{drugState,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.edu.cqu.hospital.model.Prescription">
+    update prescription_detail
+    <set>
+      <if test="number != null">
+        NUMBER = #{number,jdbcType=INTEGER},
+      </if>
+      <if test="howUse != null">
+        HOW_USE = #{howUse,jdbcType=VARCHAR},
+      </if>
+      <if test="drugState != null">
+        DRUG_STATE = #{drugState,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where PRESC_ID = #{prescId,jdbcType=VARCHAR}
+      and MEDICINE_ID = #{medicineId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.edu.cqu.hospital.model.Prescription">
+    update prescription_detail
+    set NUMBER = #{number,jdbcType=INTEGER},
+      HOW_USE = #{howUse,jdbcType=VARCHAR},
+      DRUG_STATE = #{drugState,jdbcType=VARCHAR}
+    where PRESC_ID = #{prescId,jdbcType=VARCHAR}
+      and MEDICINE_ID = #{medicineId,jdbcType=VARCHAR}
+  </update>
+  <resultMap id="BaseResultMap" type="cn.edu.cqu.hospital.model.Prescription">
+    <id column="PRESC_ID" jdbcType="VARCHAR" property="prescId" />
     <result column="RECARD_ID" jdbcType="VARCHAR" property="recardId" />
     <result column="BILL_ID" jdbcType="VARCHAR" property="billId" />
     <result column="PRESC_STATE" jdbcType="VARCHAR" property="prescState" />
