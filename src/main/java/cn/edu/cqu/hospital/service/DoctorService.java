@@ -5,6 +5,6 @@ import cn.edu.cqu.hospital.model.Regist;
 
 public interface DoctorService {
 
-	void check(Regist regist, Account doctorAccount);
+	int check(Regist regist, Account doctorAccount);
 
 }

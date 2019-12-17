@@ -27,7 +27,12 @@ public class DoctorCheckController {
 	public String post(Regist regist,HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		Account doctorAccount = (Account) session.getAttribute("account");
-		doctorService.check(regist,doctorAccount);
+		int state = doctorService.check(regist,doctorAccount);
+		if(state == 0)
+		{
+			
+		}
+		
 		
 		return "patiencestatus";
 	}
