@@ -25,9 +25,16 @@ public class PatienceServiceImpl implements PatienceService{
 	@Override
 	public boolean login(Account account) {
 		Account actAccount = accountMapper.selectByPrimaryKey(account.getAccountId());
-		if (actAccount.getAccountPassword() == account.getAccountPassword()) {
+		if(null == actAccount)
+		{
+			System.out.println("null");
+			return false;
+		}
+		if (account.getAccountPassword().equals(actAccount.getAccountPassword())) {
 			return true;
 		}
+		System.out.println(actAccount.getAccountPassword());
+		System.out.println(account.getAccountPassword());
 		return false;
 	}
 

@@ -10,8 +10,6 @@ public interface PatientMapper {
     int insertSelective(Patient record);
 
     Patient selectByPrimaryKey(String patientId);
-    
-    Patient selectByPatientAccount(String accountId);
 
     int updateByPrimaryKeySelective(Patient record);
 

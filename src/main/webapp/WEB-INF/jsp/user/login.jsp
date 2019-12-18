@@ -13,35 +13,28 @@
     		<input id="gritter-light" checked="" type="checkbox" class="ace-switch ace-switch-5" />
       		<div class="login-container">
         		<h1>用户登录</h1>
-        		<form id="validation-form" >
+        		<form id="validation-form" action="/Login" method="post">
           			<div class="form-group">
-		           		<input class="form-control" placeholder="用户名" type="text" name="employeecode">
+		           		<input class="form-control" placeholder="用户名" type="text" name="accountId">
 		         	</div>
           			<div class="form-group">
-		            	<input class="form-control" placeholder="密码" type="password" name="psw">
+		            	<input class="form-control" placeholder="密码" type="password" name="accountPassword">
 		          	</div>
           			<div class="form-options clearfix">
             			<a class="pull-right" href="#" onclick="spsw()">忘记密码?</a>
            				<div class="text-left">
               				<label class="checkbox"><input type="checkbox"><span>记住密码</span></label>
             			</div>
-          			</div>
-          			<button id="btnsubmit" type="submit" style="display: none;">隐藏的提交按钮</button>
-        		</form>                         
+          			</div>   		                        
         		<div class="social-login clearfix">
-          			<a class="btn btn-primary pull-left facebook" onclick="isubmit()">登陆</a>
+          			<input class="position:relative btn btn-primary pull-left facebook" type="submit" value="登录" />
         		</div>
-        		<form action="${ctx}/indexController/toindex.do" method="post"></form>
+        		</form> 
       		</div>
     	</div>
     <!-- End Login Screen -->
   	</body>
   	<script type="text/javascript">
-	  	$(function(){
-	  		//开启表单验证
-	  		formValidate();
-	  		$("input[name='employeecode']")[0].focus();
-	  	}); 
 	  	
 	  	function spsw(){
 	  		hint("请联系管理员");
@@ -68,24 +61,7 @@
 			   	  		codeChar:true,
 			   	  		minlength:3,
 			        	maxlength:16,
-			        	remote: {
-					    	url: "${ctx}/indexController/verify.do",     //后台处理程序
-						    type: "post",               //数据发送方式
-						    dataType: "json",           //接受数据格式   
-						    data: {                     //要传递的数据
-						        employeecode: $("#employeecode").val()
-						    },
-			                dataFilter: function (data, type) {
-			                //判断控制器返回的内容
-			                var json=JSON.parse(data);
-		                    	if (json.valid == "1") {
-		                        	return true;   
-		                    	}
-		                    	else if(json.valid == "0"){
-		                        	return false;
-		                    	}
-		                 	}
-						}
+			        	
 			   	  	},
 			   	  	psw:{
 				        required: true,
@@ -109,26 +85,5 @@
 				}		    
 		    });
 		}
-		
-		
-	  	//提交事件
-	  	function isubmit(){
-	  		$("#btnsubmit").click();
-	  	}
-	  	
-	  	//ajax提交
-	  	function formSubmit(){
-	  		$.post("${ctx}/indexController/login.do",
-			{employeecode:$("input[name='employeecode']").val(),
-			 psw:$("input[name='psw']").val()},
-			function(data){
-				if(data.msg == "1"){
-					document.forms[1].submit();
-	 			}else{ 				
-	 				hint(data.msg);
-	 				$("input[name='psw']").val("");
-	 			}
-			});
-	  	}  	
   	</script>
 </html>

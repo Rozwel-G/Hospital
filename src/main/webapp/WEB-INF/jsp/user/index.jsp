@@ -75,38 +75,11 @@
 				</div><!--#sidebar-shortcuts-->
 
 				<ul class="nav nav-list" onresize="ulresize()" style="overflow:auto;">
-					<c:forEach var="menus" items="${pfuserinfo.menulist}">
-						<c:if test="${empty menus.resourceurl || menus.resourceurl == ''}">
-							<li>							
-								<a href="#" class="dropdown-toggle" >
-									<i class="${menus.resourceicon}"></i>
-									<span class="menu-text"> ${menus.resourcename} </span>
-		
-									<b class="arrow icon-angle-down"></b>
-								</a>
-								<ul class="submenu">
-									<c:forEach var="item" items="${pfuserinfo.resources}">
-										<c:if test="${item.resourcesuperiorid != 0 && item.resourcesuperiorid == menus.id}">
-											<li>
-												<a href="#" onclick="show(this,'${ctx}${item.resourceurl}')">
-													<i class="icon-double-angle-right"></i>
-													${item.resourcename}
-												</a>
-											</li>
-										</c:if>
-									</c:forEach>
-								</ul>
-							</li>
-						</c:if>
-						<c:if test="${!empty menus.resourceurl}">
-							<li>
-								<a href="#" onclick="show(this,'${ctx}${menus.resourceurl}')">
-									<i class="${menus.resourceicon}"></i>
-									<span class="menu-text"> ${menus.resourcename} </span>
-								</a>
-							</li>
-						</c:if>
-					</c:forEach>
+					<li>							
+						<a href="#" class="dropdown-toggle" >
+							<span class="menu-text" onclick=onSrc("Login")> 发药管理 </span>
+						</a>
+					</li>
 
 				</ul><!--/.nav-list-->
 

@@ -17,11 +17,13 @@ public class LoginController {
 	
 	@RequestMapping(value = "/Login",method = RequestMethod.GET)
 	public String get() {
-		return "user/index";
+		System.out.println("1");
+		return "user/login";
 	}
 	
-	@RequestMapping(value = "/Login",method = RequestMethod.POST)
+	@RequestMapping(value = "/Login",method = RequestMethod.POST,produces = "text/plain;charset=utf-8")
 	public String post(Account account,Model model) {
+		System.out.println(account.getAccountId());
 		if(patienceService.login(account))
 		{
 			Patient patient = patienceService.findPatient(account);
@@ -29,7 +31,7 @@ public class LoginController {
 			return "user/index";
 		}
 		
-		return "/error";
+		return "user/login";
 	}
 
 }

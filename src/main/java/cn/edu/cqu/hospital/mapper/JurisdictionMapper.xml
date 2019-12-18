@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.cqu.hospital.mapper.JurisdictionMapper">
+  <resultMap id="BaseResultMap" type="cn.edu.cqu.hospital.model.Jurisdiction">
+    <id column="num" jdbcType="INTEGER" property="num" />
+    <result column="identify" jdbcType="VARCHAR" property="identify" />
+    <result column="function" jdbcType="VARCHAR" property="function" />
+    <result column="url" jdbcType="VARCHAR" property="url" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    num, identify, function, url
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from jurisdiction
+    where num = #{num,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from jurisdiction
+    where num = #{num,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.edu.cqu.hospital.model.Jurisdiction">
+    insert into jurisdiction (num, identify, function, 
+      url)
+    values (#{num,jdbcType=INTEGER}, #{identify,jdbcType=VARCHAR}, #{function,jdbcType=VARCHAR}, 
+      #{url,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.edu.cqu.hospital.model.Jurisdiction">
+    insert into jurisdiction
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="num != null">
+        num,
+      </if>
+      <if test="identify != null">
+        identify,
+      </if>
+      <if test="function != null">
+        function,
+      </if>
+      <if test="url != null">
+        url,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="num != null">
+        #{num,jdbcType=INTEGER},
+      </if>
+      <if test="identify != null">
+        #{identify,jdbcType=VARCHAR},
+      </if>
+      <if test="function != null">
+        #{function,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null">
+        #{url,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.edu.cqu.hospital.model.Jurisdiction">
+    update jurisdiction
+    <set>
+      <if test="identify != null">
+        identify = #{identify,jdbcType=VARCHAR},
+      </if>
+      <if test="function != null">
+        function = #{function,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null">
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where num = #{num,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.edu.cqu.hospital.model.Jurisdiction">
+    update jurisdiction
+    set identify = #{identify,jdbcType=VARCHAR},
+      function = #{function,jdbcType=VARCHAR},
+      url = #{url,jdbcType=VARCHAR}
+    where num = #{num,jdbcType=INTEGER}
+  </update>
+</mapper>

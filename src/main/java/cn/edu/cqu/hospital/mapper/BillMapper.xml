@@ -142,4 +142,568 @@
       BILL_STATE = #{billState,jdbcType=VARCHAR}
     where BILL_ID = #{billId,jdbcType=VARCHAR}
   </update>
+  <resultMap id="BaseResultMap" type="cn.edu.cqu.hospital.model.Bill">
+    <id column="BILL_ID" jdbcType="VARCHAR" property="billId" />
+    <result column="EXAM_ENTITY_ID" jdbcType="VARCHAR" property="examEntityId" />
+    <result column="REGIST_ID" jdbcType="VARCHAR" property="registId" />
+    <result column="PRESC_ID" jdbcType="VARCHAR" property="prescId" />
+    <result column="STAFF_ID" jdbcType="VARCHAR" property="staffId" />
+    <result column="BILL_PRICE" jdbcType="REAL" property="billPrice" />
+    <result column="BILL_STATE" jdbcType="VARCHAR" property="billState" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="cn.edu.cqu.hospital.model.Bill">
+    <result column="BILL_TIME" jdbcType="LONGVARCHAR" property="billTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    BILL_ID, EXAM_ENTITY_ID, REGIST_ID, PRESC_ID, STAFF_ID, BILL_PRICE, BILL_STATE
+  </sql>
+  <sql id="Blob_Column_List">
+    BILL_TIME
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from bill
+    where BILL_ID = #{billId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from bill
+    where BILL_ID = #{billId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="cn.edu.cqu.hospital.model.Bill">
+    insert into bill (BILL_ID, EXAM_ENTITY_ID, REGIST_ID, 
+      PRESC_ID, STAFF_ID, BILL_PRICE, 
+      BILL_STATE, BILL_TIME)
+    values (#{billId,jdbcType=VARCHAR}, #{examEntityId,jdbcType=VARCHAR}, #{registId,jdbcType=VARCHAR}, 
+      #{prescId,jdbcType=VARCHAR}, #{staffId,jdbcType=VARCHAR}, #{billPrice,jdbcType=REAL}, 
+      #{billState,jdbcType=VARCHAR}, #{billTime,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.edu.cqu.hospital.model.Bill">
+    insert into bill
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="billId != null">
+        BILL_ID,
+      </if>
+      <if test="examEntityId != null">
+        EXAM_ENTITY_ID,
+      </if>
+      <if test="registId != null">
+        REGIST_ID,
+      </if>
+      <if test="prescId != null">
+        PRESC_ID,
+      </if>
+      <if test="staffId != null">
+        STAFF_ID,
+      </if>
+      <if test="billPrice != null">
+        BILL_PRICE,
+      </if>
+      <if test="billState != null">
+        BILL_STATE,
+      </if>
+      <if test="billTime != null">
+        BILL_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="billId != null">
+        #{billId,jdbcType=VARCHAR},
+      </if>
+      <if test="examEntityId != null">
+        #{examEntityId,jdbcType=VARCHAR},
+      </if>
+      <if test="registId != null">
+        #{registId,jdbcType=VARCHAR},
+      </if>
+      <if test="prescId != null">
+        #{prescId,jdbcType=VARCHAR},
+      </if>
+      <if test="staffId != null">
+        #{staffId,jdbcType=VARCHAR},
+      </if>
+      <if test="billPrice != null">
+        #{billPrice,jdbcType=REAL},
+      </if>
+      <if test="billState != null">
+        #{billState,jdbcType=VARCHAR},
+      </if>
+      <if test="billTime != null">
+        #{billTime,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.edu.cqu.hospital.model.Bill">
+    update bill
+    <set>
+      <if test="examEntityId != null">
+        EXAM_ENTITY_ID = #{examEntityId,jdbcType=VARCHAR},
+      </if>
+      <if test="registId != null">
+        REGIST_ID = #{registId,jdbcType=VARCHAR},
+      </if>
+      <if test="prescId != null">
+        PRESC_ID = #{prescId,jdbcType=VARCHAR},
+      </if>
+      <if test="staffId != null">
+        STAFF_ID = #{staffId,jdbcType=VARCHAR},
+      </if>
+      <if test="billPrice != null">
+        BILL_PRICE = #{billPrice,jdbcType=REAL},
+      </if>
+      <if test="billState != null">
+        BILL_STATE = #{billState,jdbcType=VARCHAR},
+      </if>
+      <if test="billTime != null">
+        BILL_TIME = #{billTime,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where BILL_ID = #{billId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="cn.edu.cqu.hospital.model.Bill">
+    update bill
+    set EXAM_ENTITY_ID = #{examEntityId,jdbcType=VARCHAR},
+      REGIST_ID = #{registId,jdbcType=VARCHAR},
+      PRESC_ID = #{prescId,jdbcType=VARCHAR},
+      STAFF_ID = #{staffId,jdbcType=VARCHAR},
+      BILL_PRICE = #{billPrice,jdbcType=REAL},
+      BILL_STATE = #{billState,jdbcType=VARCHAR},
+      BILL_TIME = #{billTime,jdbcType=LONGVARCHAR}
+    where BILL_ID = #{billId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.edu.cqu.hospital.model.Bill">
+    update bill
+    set EXAM_ENTITY_ID = #{examEntityId,jdbcType=VARCHAR},
+      REGIST_ID = #{registId,jdbcType=VARCHAR},
+      PRESC_ID = #{prescId,jdbcType=VARCHAR},
+      STAFF_ID = #{staffId,jdbcType=VARCHAR},
+      BILL_PRICE = #{billPrice,jdbcType=REAL},
+      BILL_STATE = #{billState,jdbcType=VARCHAR}
+    where BILL_ID = #{billId,jdbcType=VARCHAR}
+  </update>
+  <resultMap id="BaseResultMap" type="cn.edu.cqu.hospital.model.Bill">
+    <id column="BILL_ID" jdbcType="VARCHAR" property="billId" />
+    <result column="EXAM_ENTITY_ID" jdbcType="VARCHAR" property="examEntityId" />
+    <result column="REGIST_ID" jdbcType="VARCHAR" property="registId" />
+    <result column="PRESC_ID" jdbcType="VARCHAR" property="prescId" />
+    <result column="STAFF_ID" jdbcType="VARCHAR" property="staffId" />
+    <result column="BILL_PRICE" jdbcType="REAL" property="billPrice" />
+    <result column="BILL_STATE" jdbcType="VARCHAR" property="billState" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="cn.edu.cqu.hospital.model.Bill">
+    <result column="BILL_TIME" jdbcType="LONGVARCHAR" property="billTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    BILL_ID, EXAM_ENTITY_ID, REGIST_ID, PRESC_ID, STAFF_ID, BILL_PRICE, BILL_STATE
+  </sql>
+  <sql id="Blob_Column_List">
+    BILL_TIME
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from bill
+    where BILL_ID = #{billId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from bill
+    where BILL_ID = #{billId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="cn.edu.cqu.hospital.model.Bill">
+    insert into bill (BILL_ID, EXAM_ENTITY_ID, REGIST_ID, 
+      PRESC_ID, STAFF_ID, BILL_PRICE, 
+      BILL_STATE, BILL_TIME)
+    values (#{billId,jdbcType=VARCHAR}, #{examEntityId,jdbcType=VARCHAR}, #{registId,jdbcType=VARCHAR}, 
+      #{prescId,jdbcType=VARCHAR}, #{staffId,jdbcType=VARCHAR}, #{billPrice,jdbcType=REAL}, 
+      #{billState,jdbcType=VARCHAR}, #{billTime,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.edu.cqu.hospital.model.Bill">
+    insert into bill
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="billId != null">
+        BILL_ID,
+      </if>
+      <if test="examEntityId != null">
+        EXAM_ENTITY_ID,
+      </if>
+      <if test="registId != null">
+        REGIST_ID,
+      </if>
+      <if test="prescId != null">
+        PRESC_ID,
+      </if>
+      <if test="staffId != null">
+        STAFF_ID,
+      </if>
+      <if test="billPrice != null">
+        BILL_PRICE,
+      </if>
+      <if test="billState != null">
+        BILL_STATE,
+      </if>
+      <if test="billTime != null">
+        BILL_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="billId != null">
+        #{billId,jdbcType=VARCHAR},
+      </if>
+      <if test="examEntityId != null">
+        #{examEntityId,jdbcType=VARCHAR},
+      </if>
+      <if test="registId != null">
+        #{registId,jdbcType=VARCHAR},
+      </if>
+      <if test="prescId != null">
+        #{prescId,jdbcType=VARCHAR},
+      </if>
+      <if test="staffId != null">
+        #{staffId,jdbcType=VARCHAR},
+      </if>
+      <if test="billPrice != null">
+        #{billPrice,jdbcType=REAL},
+      </if>
+      <if test="billState != null">
+        #{billState,jdbcType=VARCHAR},
+      </if>
+      <if test="billTime != null">
+        #{billTime,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.edu.cqu.hospital.model.Bill">
+    update bill
+    <set>
+      <if test="examEntityId != null">
+        EXAM_ENTITY_ID = #{examEntityId,jdbcType=VARCHAR},
+      </if>
+      <if test="registId != null">
+        REGIST_ID = #{registId,jdbcType=VARCHAR},
+      </if>
+      <if test="prescId != null">
+        PRESC_ID = #{prescId,jdbcType=VARCHAR},
+      </if>
+      <if test="staffId != null">
+        STAFF_ID = #{staffId,jdbcType=VARCHAR},
+      </if>
+      <if test="billPrice != null">
+        BILL_PRICE = #{billPrice,jdbcType=REAL},
+      </if>
+      <if test="billState != null">
+        BILL_STATE = #{billState,jdbcType=VARCHAR},
+      </if>
+      <if test="billTime != null">
+        BILL_TIME = #{billTime,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where BILL_ID = #{billId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="cn.edu.cqu.hospital.model.Bill">
+    update bill
+    set EXAM_ENTITY_ID = #{examEntityId,jdbcType=VARCHAR},
+      REGIST_ID = #{registId,jdbcType=VARCHAR},
+      PRESC_ID = #{prescId,jdbcType=VARCHAR},
+      STAFF_ID = #{staffId,jdbcType=VARCHAR},
+      BILL_PRICE = #{billPrice,jdbcType=REAL},
+      BILL_STATE = #{billState,jdbcType=VARCHAR},
+      BILL_TIME = #{billTime,jdbcType=LONGVARCHAR}
+    where BILL_ID = #{billId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.edu.cqu.hospital.model.Bill">
+    update bill
+    set EXAM_ENTITY_ID = #{examEntityId,jdbcType=VARCHAR},
+      REGIST_ID = #{registId,jdbcType=VARCHAR},
+      PRESC_ID = #{prescId,jdbcType=VARCHAR},
+      STAFF_ID = #{staffId,jdbcType=VARCHAR},
+      BILL_PRICE = #{billPrice,jdbcType=REAL},
+      BILL_STATE = #{billState,jdbcType=VARCHAR}
+    where BILL_ID = #{billId,jdbcType=VARCHAR}
+  </update>
+  <resultMap id="BaseResultMap" type="cn.edu.cqu.hospital.model.Bill">
+    <id column="BILL_ID" jdbcType="VARCHAR" property="billId" />
+    <result column="EXAM_ENTITY_ID" jdbcType="VARCHAR" property="examEntityId" />
+    <result column="REGIST_ID" jdbcType="VARCHAR" property="registId" />
+    <result column="PRESC_ID" jdbcType="VARCHAR" property="prescId" />
+    <result column="STAFF_ID" jdbcType="VARCHAR" property="staffId" />
+    <result column="BILL_PRICE" jdbcType="REAL" property="billPrice" />
+    <result column="BILL_STATE" jdbcType="VARCHAR" property="billState" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="cn.edu.cqu.hospital.model.Bill">
+    <result column="BILL_TIME" jdbcType="LONGVARCHAR" property="billTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    BILL_ID, EXAM_ENTITY_ID, REGIST_ID, PRESC_ID, STAFF_ID, BILL_PRICE, BILL_STATE
+  </sql>
+  <sql id="Blob_Column_List">
+    BILL_TIME
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from bill
+    where BILL_ID = #{billId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from bill
+    where BILL_ID = #{billId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="cn.edu.cqu.hospital.model.Bill">
+    insert into bill (BILL_ID, EXAM_ENTITY_ID, REGIST_ID, 
+      PRESC_ID, STAFF_ID, BILL_PRICE, 
+      BILL_STATE, BILL_TIME)
+    values (#{billId,jdbcType=VARCHAR}, #{examEntityId,jdbcType=VARCHAR}, #{registId,jdbcType=VARCHAR}, 
+      #{prescId,jdbcType=VARCHAR}, #{staffId,jdbcType=VARCHAR}, #{billPrice,jdbcType=REAL}, 
+      #{billState,jdbcType=VARCHAR}, #{billTime,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.edu.cqu.hospital.model.Bill">
+    insert into bill
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="billId != null">
+        BILL_ID,
+      </if>
+      <if test="examEntityId != null">
+        EXAM_ENTITY_ID,
+      </if>
+      <if test="registId != null">
+        REGIST_ID,
+      </if>
+      <if test="prescId != null">
+        PRESC_ID,
+      </if>
+      <if test="staffId != null">
+        STAFF_ID,
+      </if>
+      <if test="billPrice != null">
+        BILL_PRICE,
+      </if>
+      <if test="billState != null">
+        BILL_STATE,
+      </if>
+      <if test="billTime != null">
+        BILL_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="billId != null">
+        #{billId,jdbcType=VARCHAR},
+      </if>
+      <if test="examEntityId != null">
+        #{examEntityId,jdbcType=VARCHAR},
+      </if>
+      <if test="registId != null">
+        #{registId,jdbcType=VARCHAR},
+      </if>
+      <if test="prescId != null">
+        #{prescId,jdbcType=VARCHAR},
+      </if>
+      <if test="staffId != null">
+        #{staffId,jdbcType=VARCHAR},
+      </if>
+      <if test="billPrice != null">
+        #{billPrice,jdbcType=REAL},
+      </if>
+      <if test="billState != null">
+        #{billState,jdbcType=VARCHAR},
+      </if>
+      <if test="billTime != null">
+        #{billTime,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.edu.cqu.hospital.model.Bill">
+    update bill
+    <set>
+      <if test="examEntityId != null">
+        EXAM_ENTITY_ID = #{examEntityId,jdbcType=VARCHAR},
+      </if>
+      <if test="registId != null">
+        REGIST_ID = #{registId,jdbcType=VARCHAR},
+      </if>
+      <if test="prescId != null">
+        PRESC_ID = #{prescId,jdbcType=VARCHAR},
+      </if>
+      <if test="staffId != null">
+        STAFF_ID = #{staffId,jdbcType=VARCHAR},
+      </if>
+      <if test="billPrice != null">
+        BILL_PRICE = #{billPrice,jdbcType=REAL},
+      </if>
+      <if test="billState != null">
+        BILL_STATE = #{billState,jdbcType=VARCHAR},
+      </if>
+      <if test="billTime != null">
+        BILL_TIME = #{billTime,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where BILL_ID = #{billId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="cn.edu.cqu.hospital.model.Bill">
+    update bill
+    set EXAM_ENTITY_ID = #{examEntityId,jdbcType=VARCHAR},
+      REGIST_ID = #{registId,jdbcType=VARCHAR},
+      PRESC_ID = #{prescId,jdbcType=VARCHAR},
+      STAFF_ID = #{staffId,jdbcType=VARCHAR},
+      BILL_PRICE = #{billPrice,jdbcType=REAL},
+      BILL_STATE = #{billState,jdbcType=VARCHAR},
+      BILL_TIME = #{billTime,jdbcType=LONGVARCHAR}
+    where BILL_ID = #{billId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.edu.cqu.hospital.model.Bill">
+    update bill
+    set EXAM_ENTITY_ID = #{examEntityId,jdbcType=VARCHAR},
+      REGIST_ID = #{registId,jdbcType=VARCHAR},
+      PRESC_ID = #{prescId,jdbcType=VARCHAR},
+      STAFF_ID = #{staffId,jdbcType=VARCHAR},
+      BILL_PRICE = #{billPrice,jdbcType=REAL},
+      BILL_STATE = #{billState,jdbcType=VARCHAR}
+    where BILL_ID = #{billId,jdbcType=VARCHAR}
+  </update>
+  <resultMap id="BaseResultMap" type="cn.edu.cqu.hospital.model.Bill">
+    <id column="BILL_ID" jdbcType="VARCHAR" property="billId" />
+    <result column="EXAM_ENTITY_ID" jdbcType="VARCHAR" property="examEntityId" />
+    <result column="REGIST_ID" jdbcType="VARCHAR" property="registId" />
+    <result column="PRESC_ID" jdbcType="VARCHAR" property="prescId" />
+    <result column="STAFF_ID" jdbcType="VARCHAR" property="staffId" />
+    <result column="BILL_PRICE" jdbcType="REAL" property="billPrice" />
+    <result column="BILL_STATE" jdbcType="VARCHAR" property="billState" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="cn.edu.cqu.hospital.model.Bill">
+    <result column="BILL_TIME" jdbcType="LONGVARCHAR" property="billTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    BILL_ID, EXAM_ENTITY_ID, REGIST_ID, PRESC_ID, STAFF_ID, BILL_PRICE, BILL_STATE
+  </sql>
+  <sql id="Blob_Column_List">
+    BILL_TIME
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from bill
+    where BILL_ID = #{billId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from bill
+    where BILL_ID = #{billId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="cn.edu.cqu.hospital.model.Bill">
+    insert into bill (BILL_ID, EXAM_ENTITY_ID, REGIST_ID, 
+      PRESC_ID, STAFF_ID, BILL_PRICE, 
+      BILL_STATE, BILL_TIME)
+    values (#{billId,jdbcType=VARCHAR}, #{examEntityId,jdbcType=VARCHAR}, #{registId,jdbcType=VARCHAR}, 
+      #{prescId,jdbcType=VARCHAR}, #{staffId,jdbcType=VARCHAR}, #{billPrice,jdbcType=REAL}, 
+      #{billState,jdbcType=VARCHAR}, #{billTime,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.edu.cqu.hospital.model.Bill">
+    insert into bill
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="billId != null">
+        BILL_ID,
+      </if>
+      <if test="examEntityId != null">
+        EXAM_ENTITY_ID,
+      </if>
+      <if test="registId != null">
+        REGIST_ID,
+      </if>
+      <if test="prescId != null">
+        PRESC_ID,
+      </if>
+      <if test="staffId != null">
+        STAFF_ID,
+      </if>
+      <if test="billPrice != null">
+        BILL_PRICE,
+      </if>
+      <if test="billState != null">
+        BILL_STATE,
+      </if>
+      <if test="billTime != null">
+        BILL_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="billId != null">
+        #{billId,jdbcType=VARCHAR},
+      </if>
+      <if test="examEntityId != null">
+        #{examEntityId,jdbcType=VARCHAR},
+      </if>
+      <if test="registId != null">
+        #{registId,jdbcType=VARCHAR},
+      </if>
+      <if test="prescId != null">
+        #{prescId,jdbcType=VARCHAR},
+      </if>
+      <if test="staffId != null">
+        #{staffId,jdbcType=VARCHAR},
+      </if>
+      <if test="billPrice != null">
+        #{billPrice,jdbcType=REAL},
+      </if>
+      <if test="billState != null">
+        #{billState,jdbcType=VARCHAR},
+      </if>
+      <if test="billTime != null">
+        #{billTime,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.edu.cqu.hospital.model.Bill">
+    update bill
+    <set>
+      <if test="examEntityId != null">
+        EXAM_ENTITY_ID = #{examEntityId,jdbcType=VARCHAR},
+      </if>
+      <if test="registId != null">
+        REGIST_ID = #{registId,jdbcType=VARCHAR},
+      </if>
+      <if test="prescId != null">
+        PRESC_ID = #{prescId,jdbcType=VARCHAR},
+      </if>
+      <if test="staffId != null">
+        STAFF_ID = #{staffId,jdbcType=VARCHAR},
+      </if>
+      <if test="billPrice != null">
+        BILL_PRICE = #{billPrice,jdbcType=REAL},
+      </if>
+      <if test="billState != null">
+        BILL_STATE = #{billState,jdbcType=VARCHAR},
+      </if>
+      <if test="billTime != null">
+        BILL_TIME = #{billTime,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where BILL_ID = #{billId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="cn.edu.cqu.hospital.model.Bill">
+    update bill
+    set EXAM_ENTITY_ID = #{examEntityId,jdbcType=VARCHAR},
+      REGIST_ID = #{registId,jdbcType=VARCHAR},
+      PRESC_ID = #{prescId,jdbcType=VARCHAR},
+      STAFF_ID = #{staffId,jdbcType=VARCHAR},
+      BILL_PRICE = #{billPrice,jdbcType=REAL},
+      BILL_STATE = #{billState,jdbcType=VARCHAR},
+      BILL_TIME = #{billTime,jdbcType=LONGVARCHAR}
+    where BILL_ID = #{billId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.edu.cqu.hospital.model.Bill">
+    update bill
+    set EXAM_ENTITY_ID = #{examEntityId,jdbcType=VARCHAR},
+      REGIST_ID = #{registId,jdbcType=VARCHAR},
+      PRESC_ID = #{prescId,jdbcType=VARCHAR},
+      STAFF_ID = #{staffId,jdbcType=VARCHAR},
+      BILL_PRICE = #{billPrice,jdbcType=REAL},
+      BILL_STATE = #{billState,jdbcType=VARCHAR}
+    where BILL_ID = #{billId,jdbcType=VARCHAR}
+  </update>
 </mapper>

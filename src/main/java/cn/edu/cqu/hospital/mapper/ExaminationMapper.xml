@@ -92,4 +92,368 @@
       EXAM_DEPARTMENT = #{examDepartment,jdbcType=VARCHAR}
     where EXAM_ID = #{examId,jdbcType=VARCHAR}
   </update>
+  <resultMap id="BaseResultMap" type="cn.edu.cqu.hospital.model.Examination">
+    <id column="EXAM_ID" jdbcType="VARCHAR" property="examId" />
+    <result column="EXAM_NAME" jdbcType="VARCHAR" property="examName" />
+    <result column="EXAM_DEPARTMENT" jdbcType="VARCHAR" property="examDepartment" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="cn.edu.cqu.hospital.model.Examination">
+    <result column="EXAM_DETAIL" jdbcType="LONGVARCHAR" property="examDetail" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    EXAM_ID, EXAM_NAME, EXAM_DEPARTMENT
+  </sql>
+  <sql id="Blob_Column_List">
+    EXAM_DETAIL
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from examination
+    where EXAM_ID = #{examId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from examination
+    where EXAM_ID = #{examId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="cn.edu.cqu.hospital.model.Examination">
+    insert into examination (EXAM_ID, EXAM_NAME, EXAM_DEPARTMENT, 
+      EXAM_DETAIL)
+    values (#{examId,jdbcType=VARCHAR}, #{examName,jdbcType=VARCHAR}, #{examDepartment,jdbcType=VARCHAR}, 
+      #{examDetail,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.edu.cqu.hospital.model.Examination">
+    insert into examination
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="examId != null">
+        EXAM_ID,
+      </if>
+      <if test="examName != null">
+        EXAM_NAME,
+      </if>
+      <if test="examDepartment != null">
+        EXAM_DEPARTMENT,
+      </if>
+      <if test="examDetail != null">
+        EXAM_DETAIL,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="examId != null">
+        #{examId,jdbcType=VARCHAR},
+      </if>
+      <if test="examName != null">
+        #{examName,jdbcType=VARCHAR},
+      </if>
+      <if test="examDepartment != null">
+        #{examDepartment,jdbcType=VARCHAR},
+      </if>
+      <if test="examDetail != null">
+        #{examDetail,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.edu.cqu.hospital.model.Examination">
+    update examination
+    <set>
+      <if test="examName != null">
+        EXAM_NAME = #{examName,jdbcType=VARCHAR},
+      </if>
+      <if test="examDepartment != null">
+        EXAM_DEPARTMENT = #{examDepartment,jdbcType=VARCHAR},
+      </if>
+      <if test="examDetail != null">
+        EXAM_DETAIL = #{examDetail,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where EXAM_ID = #{examId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="cn.edu.cqu.hospital.model.Examination">
+    update examination
+    set EXAM_NAME = #{examName,jdbcType=VARCHAR},
+      EXAM_DEPARTMENT = #{examDepartment,jdbcType=VARCHAR},
+      EXAM_DETAIL = #{examDetail,jdbcType=LONGVARCHAR}
+    where EXAM_ID = #{examId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.edu.cqu.hospital.model.Examination">
+    update examination
+    set EXAM_NAME = #{examName,jdbcType=VARCHAR},
+      EXAM_DEPARTMENT = #{examDepartment,jdbcType=VARCHAR}
+    where EXAM_ID = #{examId,jdbcType=VARCHAR}
+  </update>
+  <resultMap id="BaseResultMap" type="cn.edu.cqu.hospital.model.Examination">
+    <id column="EXAM_ID" jdbcType="VARCHAR" property="examId" />
+    <result column="EXAM_NAME" jdbcType="VARCHAR" property="examName" />
+    <result column="EXAM_DEPARTMENT" jdbcType="VARCHAR" property="examDepartment" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="cn.edu.cqu.hospital.model.Examination">
+    <result column="EXAM_DETAIL" jdbcType="LONGVARCHAR" property="examDetail" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    EXAM_ID, EXAM_NAME, EXAM_DEPARTMENT
+  </sql>
+  <sql id="Blob_Column_List">
+    EXAM_DETAIL
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from examination
+    where EXAM_ID = #{examId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from examination
+    where EXAM_ID = #{examId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="cn.edu.cqu.hospital.model.Examination">
+    insert into examination (EXAM_ID, EXAM_NAME, EXAM_DEPARTMENT, 
+      EXAM_DETAIL)
+    values (#{examId,jdbcType=VARCHAR}, #{examName,jdbcType=VARCHAR}, #{examDepartment,jdbcType=VARCHAR}, 
+      #{examDetail,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.edu.cqu.hospital.model.Examination">
+    insert into examination
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="examId != null">
+        EXAM_ID,
+      </if>
+      <if test="examName != null">
+        EXAM_NAME,
+      </if>
+      <if test="examDepartment != null">
+        EXAM_DEPARTMENT,
+      </if>
+      <if test="examDetail != null">
+        EXAM_DETAIL,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="examId != null">
+        #{examId,jdbcType=VARCHAR},
+      </if>
+      <if test="examName != null">
+        #{examName,jdbcType=VARCHAR},
+      </if>
+      <if test="examDepartment != null">
+        #{examDepartment,jdbcType=VARCHAR},
+      </if>
+      <if test="examDetail != null">
+        #{examDetail,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.edu.cqu.hospital.model.Examination">
+    update examination
+    <set>
+      <if test="examName != null">
+        EXAM_NAME = #{examName,jdbcType=VARCHAR},
+      </if>
+      <if test="examDepartment != null">
+        EXAM_DEPARTMENT = #{examDepartment,jdbcType=VARCHAR},
+      </if>
+      <if test="examDetail != null">
+        EXAM_DETAIL = #{examDetail,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where EXAM_ID = #{examId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="cn.edu.cqu.hospital.model.Examination">
+    update examination
+    set EXAM_NAME = #{examName,jdbcType=VARCHAR},
+      EXAM_DEPARTMENT = #{examDepartment,jdbcType=VARCHAR},
+      EXAM_DETAIL = #{examDetail,jdbcType=LONGVARCHAR}
+    where EXAM_ID = #{examId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.edu.cqu.hospital.model.Examination">
+    update examination
+    set EXAM_NAME = #{examName,jdbcType=VARCHAR},
+      EXAM_DEPARTMENT = #{examDepartment,jdbcType=VARCHAR}
+    where EXAM_ID = #{examId,jdbcType=VARCHAR}
+  </update>
+  <resultMap id="BaseResultMap" type="cn.edu.cqu.hospital.model.Examination">
+    <id column="EXAM_ID" jdbcType="VARCHAR" property="examId" />
+    <result column="EXAM_NAME" jdbcType="VARCHAR" property="examName" />
+    <result column="EXAM_DEPARTMENT" jdbcType="VARCHAR" property="examDepartment" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="cn.edu.cqu.hospital.model.Examination">
+    <result column="EXAM_DETAIL" jdbcType="LONGVARCHAR" property="examDetail" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    EXAM_ID, EXAM_NAME, EXAM_DEPARTMENT
+  </sql>
+  <sql id="Blob_Column_List">
+    EXAM_DETAIL
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from examination
+    where EXAM_ID = #{examId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from examination
+    where EXAM_ID = #{examId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="cn.edu.cqu.hospital.model.Examination">
+    insert into examination (EXAM_ID, EXAM_NAME, EXAM_DEPARTMENT, 
+      EXAM_DETAIL)
+    values (#{examId,jdbcType=VARCHAR}, #{examName,jdbcType=VARCHAR}, #{examDepartment,jdbcType=VARCHAR}, 
+      #{examDetail,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.edu.cqu.hospital.model.Examination">
+    insert into examination
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="examId != null">
+        EXAM_ID,
+      </if>
+      <if test="examName != null">
+        EXAM_NAME,
+      </if>
+      <if test="examDepartment != null">
+        EXAM_DEPARTMENT,
+      </if>
+      <if test="examDetail != null">
+        EXAM_DETAIL,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="examId != null">
+        #{examId,jdbcType=VARCHAR},
+      </if>
+      <if test="examName != null">
+        #{examName,jdbcType=VARCHAR},
+      </if>
+      <if test="examDepartment != null">
+        #{examDepartment,jdbcType=VARCHAR},
+      </if>
+      <if test="examDetail != null">
+        #{examDetail,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.edu.cqu.hospital.model.Examination">
+    update examination
+    <set>
+      <if test="examName != null">
+        EXAM_NAME = #{examName,jdbcType=VARCHAR},
+      </if>
+      <if test="examDepartment != null">
+        EXAM_DEPARTMENT = #{examDepartment,jdbcType=VARCHAR},
+      </if>
+      <if test="examDetail != null">
+        EXAM_DETAIL = #{examDetail,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where EXAM_ID = #{examId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="cn.edu.cqu.hospital.model.Examination">
+    update examination
+    set EXAM_NAME = #{examName,jdbcType=VARCHAR},
+      EXAM_DEPARTMENT = #{examDepartment,jdbcType=VARCHAR},
+      EXAM_DETAIL = #{examDetail,jdbcType=LONGVARCHAR}
+    where EXAM_ID = #{examId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.edu.cqu.hospital.model.Examination">
+    update examination
+    set EXAM_NAME = #{examName,jdbcType=VARCHAR},
+      EXAM_DEPARTMENT = #{examDepartment,jdbcType=VARCHAR}
+    where EXAM_ID = #{examId,jdbcType=VARCHAR}
+  </update>
+  <resultMap id="BaseResultMap" type="cn.edu.cqu.hospital.model.Examination">
+    <id column="EXAM_ID" jdbcType="VARCHAR" property="examId" />
+    <result column="EXAM_NAME" jdbcType="VARCHAR" property="examName" />
+    <result column="EXAM_DEPARTMENT" jdbcType="VARCHAR" property="examDepartment" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="cn.edu.cqu.hospital.model.Examination">
+    <result column="EXAM_DETAIL" jdbcType="LONGVARCHAR" property="examDetail" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    EXAM_ID, EXAM_NAME, EXAM_DEPARTMENT
+  </sql>
+  <sql id="Blob_Column_List">
+    EXAM_DETAIL
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from examination
+    where EXAM_ID = #{examId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from examination
+    where EXAM_ID = #{examId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="cn.edu.cqu.hospital.model.Examination">
+    insert into examination (EXAM_ID, EXAM_NAME, EXAM_DEPARTMENT, 
+      EXAM_DETAIL)
+    values (#{examId,jdbcType=VARCHAR}, #{examName,jdbcType=VARCHAR}, #{examDepartment,jdbcType=VARCHAR}, 
+      #{examDetail,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.edu.cqu.hospital.model.Examination">
+    insert into examination
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="examId != null">
+        EXAM_ID,
+      </if>
+      <if test="examName != null">
+        EXAM_NAME,
+      </if>
+      <if test="examDepartment != null">
+        EXAM_DEPARTMENT,
+      </if>
+      <if test="examDetail != null">
+        EXAM_DETAIL,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="examId != null">
+        #{examId,jdbcType=VARCHAR},
+      </if>
+      <if test="examName != null">
+        #{examName,jdbcType=VARCHAR},
+      </if>
+      <if test="examDepartment != null">
+        #{examDepartment,jdbcType=VARCHAR},
+      </if>
+      <if test="examDetail != null">
+        #{examDetail,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.edu.cqu.hospital.model.Examination">
+    update examination
+    <set>
+      <if test="examName != null">
+        EXAM_NAME = #{examName,jdbcType=VARCHAR},
+      </if>
+      <if test="examDepartment != null">
+        EXAM_DEPARTMENT = #{examDepartment,jdbcType=VARCHAR},
+      </if>
+      <if test="examDetail != null">
+        EXAM_DETAIL = #{examDetail,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where EXAM_ID = #{examId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="cn.edu.cqu.hospital.model.Examination">
+    update examination
+    set EXAM_NAME = #{examName,jdbcType=VARCHAR},
+      EXAM_DEPARTMENT = #{examDepartment,jdbcType=VARCHAR},
+      EXAM_DETAIL = #{examDetail,jdbcType=LONGVARCHAR}
+    where EXAM_ID = #{examId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.edu.cqu.hospital.model.Examination">
+    update examination
+    set EXAM_NAME = #{examName,jdbcType=VARCHAR},
+      EXAM_DEPARTMENT = #{examDepartment,jdbcType=VARCHAR}
+    where EXAM_ID = #{examId,jdbcType=VARCHAR}
+  </update>
 </mapper>
